@@ -32,10 +32,20 @@
   .accent{height:4px;background:linear-gradient(90deg,var(--teal-light),var(--teal))}
 
   /* header */
-  .head{display:flex;align-items:center;justify-content:space-between;padding:22px 30px;border-bottom:1px solid var(--border)}
+  .head{display:flex;align-items:center;justify-content:space-between;padding:20px 30px;border-bottom:1px solid var(--border);gap:14px}
+  .head .brand{display:flex;align-items:center;gap:12px;min-width:0}
   .head img{height:30px;width:auto;display:block}
   .head .wordmark{display:none;font-weight:700;font-size:1.05rem;letter-spacing:.12em;color:var(--ink)}
   .head .tag{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+  .userchip{display:flex;align-items:center;gap:10px;font-size:.8rem;text-align:right}
+  .userchip .nm{font-weight:600;color:var(--ink);line-height:1.2}
+  .userchip .st{color:var(--muted);font-size:.74rem}
+  .userchip .av{width:32px;height:32px;border-radius:50%;background:var(--teal);color:#fff;display:flex;
+    align-items:center;justify-content:center;font-weight:600;font-size:.8rem;flex:none}
+
+  .banner{font-size:.78rem;padding:10px 30px;font-weight:500;display:flex;gap:8px;align-items:center}
+  .banner.preview{background:#fff7ed;color:#9a3412;border-bottom:1px solid #fed7aa}
+  .banner.setup{background:#eff6ff;color:#1e40af;border-bottom:1px solid #bfdbfe}
 
   /* stepper */
   .steps{display:flex;align-items:center;padding:22px 30px 4px}
@@ -54,10 +64,6 @@
 
   /* body */
   .body{padding:26px 30px 30px}
-  .cfgwarn{background:#fef2f2;border:1px solid #fecaca;color:#b42318;
-    border-radius:10px;padding:12px 14px;font-size:.8rem;margin-bottom:20px;line-height:1.5}
-  .cfgwarn code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(180,35,24,.08);padding:1px 5px;border-radius:4px;font-size:.92em}
-
   fieldset{border:none}
   legend{font-size:1.32rem;font-weight:600;color:var(--ink);padding:0;letter-spacing:-.01em}
   .legend-sub{color:var(--muted);font-size:.88rem;margin:6px 0 22px;line-height:1.5}
@@ -82,16 +88,14 @@
     background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;cursor:pointer}
   .err-msg{color:var(--err);font-size:.76rem;margin-top:6px;display:none;font-weight:500}
   .invalid input,.invalid select,.invalid textarea{border-color:var(--err);background:#fff}
-  .invalid input:focus,.invalid select:focus,.invalid textarea:focus{box-shadow:0 0 0 3.5px rgba(220,38,38,.12)}
   .invalid .err-msg{display:block}
 
-  /* segmented control (transaction type) */
+  /* segmented control */
   .seg{display:flex;gap:10px}
   .seg label{flex:1;position:relative;cursor:pointer}
   .seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
-  .seg .opt{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;
-    border:1.5px solid var(--border-strong);background:var(--field-bg);font-weight:600;font-size:.9rem;color:var(--text);
-    transition:.15s}
+  .seg .opt{display:flex;align-items:center;justify-content:center;padding:12px;border-radius:10px;
+    border:1.5px solid var(--border-strong);background:var(--field-bg);font-weight:600;font-size:.9rem;color:var(--text);transition:.15s}
   .seg input:hover + .opt{border-color:#c4c8d1}
   .seg input:checked + .opt{border-color:var(--teal);background:rgba(14,125,134,.06);color:var(--teal);box-shadow:0 0 0 3px rgba(14,125,134,.1)}
 
@@ -108,12 +112,32 @@
   .empty-note{color:var(--muted);font-size:.88rem;background:var(--field-bg);border:1px dashed var(--border-strong);
     border-radius:10px;padding:16px;text-align:center}
 
+  /* photo upload */
+  .drop{border:1.5px dashed var(--border-strong);border-radius:12px;padding:22px;text-align:center;background:var(--field-bg);
+    transition:.15s;cursor:pointer}
+  .drop.over{border-color:var(--teal);background:rgba(14,125,134,.05)}
+  .drop .up{display:inline-flex;align-items:center;gap:8px;font-weight:600;color:var(--teal);font-size:.88rem}
+  .drop .sub{display:block;color:var(--muted);font-size:.78rem;margin-top:6px}
+  .thumbs{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+  .thumb{position:relative;width:74px;height:74px;border-radius:10px;overflow:hidden;border:1px solid var(--border-strong);background:#fff}
+  .thumb img{width:100%;height:100%;object-fit:cover}
+  .thumb .x{position:absolute;top:3px;right:3px;width:18px;height:18px;border-radius:50%;background:rgba(16,23,40,.7);
+    color:#fff;border:none;font-size:.7rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center}
+  .thumb.up{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.7rem}
+
+  /* store display */
+  .storebox{display:flex;align-items:center;gap:10px;background:var(--field-bg);border:1px solid var(--border);
+    border-radius:10px;padding:11px 13px;font-size:.9rem;color:var(--ink);font-weight:500}
+  .storebox svg{flex:none;color:var(--teal)}
+  .storebox .lbl{color:var(--muted);font-weight:500;margin-right:2px}
+
   .nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px}
   button{font-family:inherit;font-size:.9rem;font-weight:600;border-radius:10px;padding:11px 22px;cursor:pointer;
     border:1px solid transparent;transition:background .15s,box-shadow .15s,border-color .15s,color .15s,transform .04s}
   button:active{transform:translateY(1px)}
+  button:disabled{opacity:.6;cursor:not-allowed}
   .btn-primary{background:var(--teal);color:#fff;box-shadow:0 1px 2px rgba(14,125,134,.25)}
-  .btn-primary:hover{background:var(--teal-press)}
+  .btn-primary:hover:not(:disabled){background:var(--teal-press)}
   .btn-ghost{background:#fff;color:var(--text);border-color:var(--border-strong)}
   .btn-ghost:hover{border-color:#bfc3cb;color:var(--ink)}
   .hidden{display:none !important}
@@ -124,17 +148,28 @@
   .review .k{color:var(--muted);font-weight:500;font-size:.84rem}
   .review .v{text-align:right;font-weight:600;color:var(--ink)}
 
-  .success{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
+  /* sign-in gate */
+  .gate{padding:54px 30px;text-align:center;display:flex;flex-direction:column;align-items:center}
+  .gate h2{font-size:1.4rem;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+  .gate p{color:var(--muted);font-size:.92rem;max-width:36ch;line-height:1.5;margin-bottom:26px}
+  .gate .signin{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;font-size:.95rem}
+  .gate .setupcard{margin-top:24px;text-align:left;background:#eff6ff;border:1px solid #bfdbfe;color:#1e3a8a;
+    border-radius:12px;padding:16px 18px;font-size:.82rem;line-height:1.55;max-width:520px}
+  .gate .setupcard code{font-family:ui-monospace,Menlo,monospace;background:rgba(30,58,138,.08);padding:1px 5px;border-radius:4px}
+
+  .success{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:46px 24px}
   .success .mark{width:72px;height:72px;border-radius:50%;background:rgba(21,128,61,.09);
     display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:1px solid rgba(21,128,61,.25)}
   .success h2{font-size:1.4rem;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
-  .success p{color:var(--muted);max-width:34ch;font-size:.92rem;line-height:1.5}
+  .success p{color:var(--muted);max-width:36ch;font-size:.92rem;line-height:1.5}
   .success .again{margin-top:26px}
+  .errbox{background:#fef2f2;border:1px solid #fecaca;color:#b42318;border-radius:10px;padding:12px 14px;
+    font-size:.84rem;margin-top:16px;display:none}
 
   footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:20px;font-weight:500}
 
   @media(max-width:540px){
-    .head,.steps,.body{padding-left:20px;padding-right:20px}
+    .head,.steps,.body,.banner{padding-left:20px;padding-right:20px}
     .stepitem .t{display:none}
     .bar{margin:0 8px}
   }
@@ -147,40 +182,50 @@
 
     <!-- header -->
     <div class="head">
-      <img src="https://www.diamondbanc.com/wp-content/themes/diamondbanc/img/diamond-banc-logo.svg"
-           alt="Diamond Banc"
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-      <span class="wordmark">DIAMOND BANC</span>
-      <span class="tag">Lead Intake</span>
+      <div class="brand">
+        <img src="https://www.diamondbanc.com/wp-content/themes/diamondbanc/img/diamond-banc-logo.svg"
+             alt="Diamond Banc"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span class="wordmark">DIAMOND BANC</span>
+      </div>
+      <span class="tag" id="headTag">Lead Intake</span>
+      <div class="userchip hidden" id="userchip">
+        <div><div class="nm" id="userName">—</div><div class="st" id="userStore"></div></div>
+        <div class="av" id="userAvatar">–</div>
+      </div>
+    </div>
+
+    <div class="banner preview hidden" id="previewBanner">⚠️ Preview mode — not connected to Salesforce. Submissions won't be saved yet.</div>
+
+    <!-- ============ SIGN-IN GATE ============ -->
+    <div class="gate" id="gate">
+      <h2>Diamond Banc Lead Intake</h2>
+      <p>Sign in with your Diamond Banc Salesforce account to create a lead. It'll be owned by you and tied to your store automatically.</p>
+      <button class="btn-primary signin" id="signinBtn">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M10 17l5-5-5-5M15 12H3M14 4h5a2 2 0 012 2v12a2 2 0 01-2 2h-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Sign in with Salesforce
+      </button>
+      <div class="errbox" id="gateErr"></div>
+      <div class="setupcard hidden" id="setupCard"></div>
     </div>
 
     <!-- stepper -->
-    <div class="steps" id="stepper">
+    <div class="steps hidden" id="stepper">
       <div class="stepitem" data-i="0"><span class="num">1</span><span class="t">Item</span></div>
       <div class="bar"></div>
-      <div class="stepitem" data-i="1"><span class="num">2</span><span class="t">Details</span></div>
+      <div class="stepitem" data-i="1"><span class="num">2</span><span class="t">Service &amp; Amount</span></div>
       <div class="bar"></div>
       <div class="stepitem" data-i="2"><span class="num">3</span><span class="t">Client</span></div>
     </div>
 
-    <div class="body">
-      <div id="cfgwarn" class="cfgwarn hidden"></div>
+    <div class="body hidden" id="bodyWrap">
+      <form id="leadForm" novalidate autocomplete="off">
 
-      <!-- Native Web-to-Lead form; posts to hidden iframe so user stays in-app -->
-      <form id="leadForm" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8"
-            method="POST" target="sfTarget" novalidate>
-
-        <!-- Hidden Web-to-Lead control fields (names/IDs filled from CONFIG on load) -->
-        <input type="hidden" name="oid" id="oid" />
-        <input type="hidden" name="retURL" id="retURL" value="" />
-        <input type="hidden" data-sf="Lead_via_Intake_Form__c" value="1" />
-        <input type="hidden" data-sf="Lead_Attribution__c" value="Market Director Intake" />
-
-        <!-- ============ STEP 1: ITEM ============ -->
+        <!-- ============ STEP 1: ITEM INFORMATION ============ -->
         <section class="step" data-step="0">
           <fieldset>
-            <legend>What are they bringing in?</legend>
-            <p class="legend-sub">Start with the item. The next step adjusts to the type you pick.</p>
+            <legend>Item information</legend>
+            <p class="legend-sub">Start with the item. The fields adjust to the type you pick.</p>
             <div class="grid">
               <label class="fld full">
                 <span class="lab">Item Type <span class="req">*</span></span>
@@ -195,47 +240,10 @@
                 </select>
                 <span class="err-msg">Please select an item type.</span>
               </label>
-
-              <label class="fld full">
-                <span class="lab">Transaction Type <span class="req">*</span></span>
-                <div class="seg" id="txnSeg">
-                  <label>
-                    <input type="radio" name="txn" value="sell" id="txnSell" data-sf-radio="transaction_type__c" data-req-radio/>
-                    <span class="opt">Sell</span>
-                  </label>
-                  <label>
-                    <input type="radio" name="txn" value="loan" id="txnLoan" data-sf-radio="transaction_type__c" data-req-radio/>
-                    <span class="opt">Loan</span>
-                  </label>
-                </div>
-                <input type="hidden" id="txnType" data-sf="transaction_type__c" />
-                <span class="err-msg" id="txnErr">Please choose sell or loan.</span>
-              </label>
-
-              <label class="fld full">
-                <span class="lab">Requested Amount ($) <span class="hint">— what the client wants for their item</span></span>
-                <input data-sf="request_amount__c" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 5000"/>
-              </label>
-
-              <label class="fld full">
-                <span class="lab">Item Description / Notes</span>
-                <textarea data-sf="item_description__c" maxlength="32000" placeholder="Condition, paperwork, anything notable about the item…"></textarea>
-              </label>
             </div>
-          </fieldset>
-        </section>
-
-        <!-- ============ STEP 2: DETAILS & PHOTOS ============ -->
-        <section class="step hidden" data-step="1">
-          <fieldset>
-            <legend>Item details</legend>
-            <p class="legend-sub" id="detailsSub">Specifics for this item, plus any photos.</p>
-
-            <!-- placeholder when no item type chosen -->
-            <div class="empty-note" id="noType">Pick an item type on the first step to see its fields.</div>
 
             <!-- WATCH -->
-            <div class="cond" data-cond="watch">
+            <div class="cond" data-cond="watch" style="margin-top:17px">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Watch Brand</span>
@@ -245,7 +253,7 @@
             </div>
 
             <!-- JEWELRY -->
-            <div class="cond" data-cond="jewelry">
+            <div class="cond" data-cond="jewelry" style="margin-top:17px">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Jewelry Type</span>
@@ -270,8 +278,8 @@
               </div>
             </div>
 
-            <!-- DIAMOND (loose, or jewelry w/ diamond) -->
-            <div class="cond" data-cond="diamond" style="margin-top:18px">
+            <!-- DIAMOND -->
+            <div class="cond" data-cond="diamond" style="margin-top:17px">
               <div class="subhead">Diamond details — the 4 C&rsquo;s</div>
               <div class="grid">
                 <label class="fld">
@@ -298,11 +306,15 @@
                     <option value="No">No</option>
                   </select>
                 </label>
+                <label class="fld">
+                  <span class="lab">GIA Report #</span>
+                  <input data-sf="GIA_Report_Number__c" maxlength="60" placeholder="If certified"/>
+                </label>
               </div>
             </div>
 
             <!-- HANDBAG -->
-            <div class="cond" data-cond="bag">
+            <div class="cond" data-cond="bag" style="margin-top:17px">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Handbag Brand</span>
@@ -320,7 +332,7 @@
             </div>
 
             <!-- PRECIOUS METALS -->
-            <div class="cond" data-cond="metals">
+            <div class="cond" data-cond="metals" style="margin-top:17px">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Metal Item Type</span>
@@ -333,95 +345,103 @@
               </div>
             </div>
 
-            <!-- shared valuation + photos -->
-            <div class="subhead" style="margin-top:24px">Valuation &amp; photos</div>
+            <label class="fld full" style="margin-top:17px;display:block">
+              <span class="lab">Item Description / Notes</span>
+              <textarea data-sf="item_description__c" maxlength="32000" placeholder="Condition, paperwork, anything notable about the item…"></textarea>
+            </label>
+
+            <div style="margin-top:17px">
+              <span class="lab" style="display:block;color:var(--ink);font-weight:500;font-size:.84rem;margin-bottom:7px">Upload Images <span class="hint">— photos of the item</span></span>
+              <div class="drop" id="drop">
+                <span class="up">
+                  <svg width="17" height="17" viewBox="0 0 24 24" fill="none"><path d="M12 16V4m0 0L8 8m4-4l4 4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Upload Files
+                </span>
+                <span class="sub" id="dropSub">or drop files here</span>
+                <input type="file" id="fileInput" accept="image/*" multiple style="display:none"/>
+              </div>
+              <div class="thumbs" id="thumbs"></div>
+              <input type="hidden" data-sf="upload_photo__c" id="photoField"/>
+            </div>
+          </fieldset>
+        </section>
+
+        <!-- ============ STEP 2: SERVICE & AMOUNT ============ -->
+        <section class="step hidden" data-step="1">
+          <fieldset>
+            <legend>Service &amp; amount</legend>
+            <p class="legend-sub">What does the client want to do, and for how much?</p>
             <div class="grid">
-              <label class="fld">
-                <span class="lab">Original Purchase Price ($)</span>
-                <input data-sf="Original_Purchase_Price__c" type="number" min="0" step="100" inputmode="numeric"/>
-              </label>
-              <label class="fld cond" data-cond="loan">
-                <span class="lab">Estimated Loan Duration</span>
-                <input data-sf="est_loan_duration__c" placeholder="e.g. 90 days"/>
+              <label class="fld full">
+                <span class="lab">Transaction Type <span class="req">*</span></span>
+                <div class="seg" id="txnSeg">
+                  <label><input type="radio" name="txn" value="sell" data-req-radio/><span class="opt">Sell</span></label>
+                  <label><input type="radio" name="txn" value="loan" data-req-radio/><span class="opt">Loan</span></label>
+                </div>
+                <input type="hidden" id="txnType" data-sf="transaction_type__c"/>
+                <span class="err-msg" id="txnErr">Please choose sell or loan.</span>
               </label>
               <label class="fld full">
-                <span class="lab">Photo Link <span class="hint">— paste a link to the item photo(s)</span></span>
-                <input data-sf="upload_photo__c" type="url" placeholder="Drive, Dropbox, iCloud, etc."/>
-              </label>
-              <label class="fld full">
-                <span class="lab">Appraisal Link <span class="hint">— optional</span></span>
-                <input data-sf="upload_appraisal__c" type="url" placeholder="Paste an appraisal URL"/>
+                <span class="lab">Requested Amount ($) <span class="hint">— what the client wants for their item</span></span>
+                <input data-sf="request_amount__c" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 5000"/>
               </label>
             </div>
           </fieldset>
         </section>
 
-        <!-- ============ STEP 3: CLIENT & STORE ============ -->
+        <!-- ============ STEP 3: CLIENT INFORMATION ============ -->
         <section class="step hidden" data-step="2">
           <fieldset>
-            <legend>Client &amp; store</legend>
-            <p class="legend-sub">Who is the client, and where is this lead coming from?</p>
+            <legend>Client information</legend>
+            <p class="legend-sub">Who are we working with?</p>
             <div class="grid">
               <label class="fld">
                 <span class="lab">First Name <span class="req">*</span></span>
-                <input name="first_name" maxlength="40" data-req autocomplete="given-name"/>
+                <input data-sf="FirstName" maxlength="40" data-req autocomplete="off"/>
                 <span class="err-msg">First name is required.</span>
               </label>
               <label class="fld">
                 <span class="lab">Last Name <span class="req">*</span></span>
-                <input name="last_name" maxlength="80" data-req autocomplete="family-name"/>
+                <input data-sf="LastName" maxlength="80" data-req autocomplete="off"/>
                 <span class="err-msg">Last name is required.</span>
               </label>
               <label class="fld">
                 <span class="lab">Mobile Phone <span class="req">*</span></span>
-                <input name="mobile" type="tel" data-req autocomplete="tel"/>
+                <input data-sf="MobilePhone" type="tel" data-req autocomplete="off"/>
                 <span class="err-msg">A contact phone number is required.</span>
               </label>
               <label class="fld">
                 <span class="lab">Email</span>
-                <input name="email" type="email" data-email autocomplete="email"/>
+                <input data-sf="Email" type="email" data-email autocomplete="off"/>
                 <span class="err-msg">Please enter a valid email.</span>
-              </label>
-              <label class="fld full">
-                <span class="lab">Company <span class="hint">— optional</span></span>
-                <input name="company" maxlength="40" placeholder="Leave blank for individuals"/>
-              </label>
-
-              <label class="fld">
-                <span class="lab">Store Location <span class="req">*</span></span>
-                <select data-sf="Store_Location__c" data-req>
-                  <option value="">Select location…</option>
-                </select>
-                <span class="err-msg">Please select a store location.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Lead Source <span class="req">*</span></span>
-                <select name="lead_source" data-req>
-                  <option value="">Select source…</option>
-                </select>
-                <span class="err-msg">Please select a lead source.</span>
-              </label>
-              <label class="fld full">
-                <span class="lab">Why did they come in? <span class="hint">— optional</span></span>
-                <select data-sf="Why_In__c">
-                  <option value="">Select…</option>
-                </select>
               </label>
             </div>
 
             <div class="check">
-              <input type="checkbox" id="smsConsent" data-sf="text_message_consent__c" value="1"/>
+              <input type="checkbox" id="smsConsent" data-sf="text_message_consent__c"/>
               <label for="smsConsent" class="ctxt">Customer consents to text messaging
                 <small>Check if the customer agreed to receive SMS updates.</small>
               </label>
             </div>
 
+            <div class="subhead" style="margin-top:24px">Store &amp; owner</div>
+            <div class="storebox" id="storeBox">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 9l1-5h16l1 5M4 9v10a1 1 0 001 1h14a1 1 0 001-1V9M4 9h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              <span><span class="lbl">This lead will be owned by you at</span> <strong id="storeName">your store</strong></span>
+            </div>
+            <!-- fallback manual store picker (only shown if store can't be auto-detected) -->
+            <label class="fld full hidden" id="storeManual" style="margin-top:14px">
+              <span class="lab">Store Location <span class="req">*</span></span>
+              <select data-sf="Store_Location__c" data-req-manual><option value="">Select location…</option></select>
+              <span class="err-msg">Please select a store location.</span>
+            </label>
+
             <div class="subhead" style="margin-top:24px">Review</div>
             <div class="review" id="review"></div>
+            <div class="errbox" id="submitErr"></div>
           </fieldset>
         </section>
 
-        <!-- nav -->
         <div class="nav">
           <button type="button" class="btn-ghost" id="backBtn" style="visibility:hidden">← Back</button>
           <button type="button" class="btn-primary" id="nextBtn">Continue →</button>
@@ -434,66 +454,39 @@
         <div class="mark">
           <svg width="34" height="34" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
-        <h2>Lead submitted</h2>
-        <p>The lead has been sent to Salesforce.</p>
+        <h2>Lead created</h2>
+        <p id="successMsg">The lead has been created in Salesforce and assigned to you.</p>
         <div class="again"><button type="button" class="btn-primary" id="anotherBtn">Enter another lead</button></div>
       </div>
     </div>
   </div>
 
-  <footer>Submissions create a Lead in Salesforce · Internal use only</footer>
+  <footer>Diamond Banc · Internal lead intake</footer>
 </div>
-
-<iframe name="sfTarget" id="sfTarget" style="display:none" title="sf"></iframe>
 
 <script>
 /* ============================================================
-   CONFIG  —  the ONLY thing you need to fill in.
-   oid is already set for Diamond Banc's org.
-   Paste each custom field's Web-to-Lead Field ID (looks like 00NXXXXXXXXXXXXXXX)
-   from Setup → Web-to-Lead → "Create Web-to-Lead Form".
-   Standard fields (name, email, phone, etc.) are already wired and need no IDs.
+   CONFIG — fill these in once. See the setup checklist.
    ============================================================ */
 const CONFIG = {
-  oid: "00D1I000000nglsUAA",        // Diamond Banc org ID (prefilled)
-  retURL: "",                       // optional; left blank — success shown in-app
+  // ---- Salesforce OAuth (create a Connected App, paste its Consumer Key) ----
+  loginUrl:   "https://login.salesforce.com",   // or your My Domain, e.g. https://diamondbanc.my.salesforce.com
+  clientId:   "",                               // Connected App Consumer Key  ← REQUIRED
+  apiVersion: "v60.0",
 
-  // Custom field API name  ->  Web-to-Lead Field Id (00N…)
-  fieldIds: {
-    "Store_Location__c":          "",
-    "Why_In__c":                  "",
-    "transaction_type__c":        "",
-    "text_message_consent__c":    "",
-    "Item_Type2__c":              "",
-    "watch_brand__c":             "",
-    "Jewelry_Type__c":            "",
-    "designer__c":                "",
-    "metal_type__c":              "",
-    "jewelry_diamond__c":         "",
-    "diamond_carat_weight__c":    "",
-    "diamond_shape__c":           "",
-    "Diamond_Color__c":           "",
-    "diamond_clarity__c":         "",
-    "GIA_Certified__c":           "",
-    "bag_brand__c":               "",
-    "bag_original_packaging__c":  "",
-    "Precious_Metals__c":         "",
-    "request_amount__c":          "",
-    "Original_Purchase_Price__c": "",
-    "est_loan_duration__c":       "",
-    "item_description__c":        "",
-    "upload_photo__c":            "",
-    "upload_appraisal__c":        "",
-    "Lead_via_Intake_Form__c":    "",
-    "Lead_Attribution__c":        ""
-  }
+  // Field on the USER record holding the rep's store (its values must match the
+  // Lead Store_Location__c picklist). Leave "" to let the rep pick their store manually.
+  userStoreField: "",                           // e.g. "Store_Location__c"
+
+  // ---- Cloudinary (unsigned upload preset) ----
+  cloudinary: { cloudName: "", uploadPreset: "" },   // ← for photo upload
+  photoField: "upload_photo__c"                  // Lead field that stores the photo URL(s)
 };
+const REDIRECT_URI = location.origin + location.pathname;   // must match the Connected App callback
 
-/* ---- Picklist option values (pulled live from your Salesforce org) ---- */
+/* ---- Picklist options (from your Salesforce org) ---- */
 const OPTIONS = {
   "Store_Location__c":["Atlanta","Aventura","Beverly Hills","Boca Raton","Columbia","Coral Gables","DBCOMO","Dealer Division","Ft. Lauderdale","Kansas City","Miami","Nashville","Orlando","Rochester","Roswell","Sarasota","Scottsdale","St. Louis","St. Petersburg","Tampa","West Palm Beach"],
-  "lead_source":["WalkIn","In-Person","Referral","Repeat Client","Phone","Website","Web Form Submission","Social Media","Advertisement","Promotion","VIP Promotion","Retargeting","Podium","Email Blast","Calendly Appointment","Partner","JHJ/Dealer","Shortcode SMS","Funnel Landing Page"],
-  "Why_In__c":["Phone","Referral","Partner","Search","Social Media","Print","Mailer","Email","Website"],
   "watch_brand__c":["Rolex","Cartier","Patek Philip","Omega","Breitling","Hublot","Panerai","Jaeger LeCoultre","Tag Heuer","Bell Ross","Bulgari","Other"],
   "Jewelry_Type__c":["ring","necklace","bracelet","earrings","Loose Diamond","Scrap Jewelry","Bullion","Coin(s)","other"],
   "designer__c":["cartier","tiffany","vanCleefArpels","bulgari","davidYurman","harryWinston","graff","chopard","robertoCoin","johnHardy","tacori","davidWebb","oscarHeyman","pennyPreville","charlesKrypell","chanel","other","unknown"],
@@ -505,173 +498,285 @@ const OPTIONS = {
   "bag_brand__c":["Hermes","Chanel","Louis Vuitton","Gucci","Prada","Celine","Fendi","Chloé","Other"],
   "Precious_Metals__c":["Coin(s)","Scrap Jewelry","Bullion","Flatware / Servingware","Other"]
 };
-
-/* nice display labels for lowercase/coded values */
 function titleize(v){
-  const map={cartier:"Cartier",tiffany:"Tiffany & Co.",vanCleefArpels:"Van Cleef & Arpels",bulgari:"Bulgari",davidYurman:"David Yurman",harryWinston:"Harry Winston",graff:"Graff",chopard:"Chopard",robertoCoin:"Roberto Coin",johnHardy:"John Hardy",tacori:"Tacori",davidWebb:"David Webb",oscarHeyman:"Oscar Heyman",pennyPreville:"Penny Preville",charlesKrypell:"Charles Krypell",chanel:"Chanel",sterlingSilver:"Sterling Silver",stainlessSteel:"Stainless Steel","Coin(s)":"Coin(s)"};
+  const map={cartier:"Cartier",tiffany:"Tiffany & Co.",vanCleefArpels:"Van Cleef & Arpels",bulgari:"Bulgari",davidYurman:"David Yurman",harryWinston:"Harry Winston",graff:"Graff",chopard:"Chopard",robertoCoin:"Roberto Coin",johnHardy:"John Hardy",tacori:"Tacori",davidWebb:"David Webb",oscarHeyman:"Oscar Heyman",pennyPreville:"Penny Preville",charlesKrypell:"Charles Krypell",chanel:"Chanel",sterlingSilver:"Sterling Silver",stainlessSteel:"Stainless Steel"};
   if(map[v]) return map[v];
   if(/^[a-z]/.test(v)&&!v.includes(" ")) return v.charAt(0).toUpperCase()+v.slice(1);
   return v;
 }
+function fillSelect(sel,vals){vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=titleize(v);sel.appendChild(o);});}
+document.querySelectorAll("select[data-sf]").forEach(sel=>{const f=sel.getAttribute("data-sf");if(OPTIONS[f]&&sel.options.length<=1)fillSelect(sel,OPTIONS[f]);});
+document.querySelectorAll('select[data-req-manual]').forEach(sel=>{if(sel.options.length<=1)fillSelect(sel,OPTIONS["Store_Location__c"]);});
 
-/* ---- populate selects ---- */
-function fillSelect(sel, values){
-  values.forEach(v=>{
-    const o=document.createElement("option");
-    o.value=v; o.textContent=titleize(v); sel.appendChild(o);
+/* ============================================================
+   AUTH — Salesforce OAuth 2.0 PKCE (browser, no secret)
+   ============================================================ */
+const PREVIEW = !CONFIG.clientId || location.protocol === "file:";
+let session = null;   // {token, instance, userId, name, store}
+const $=id=>document.getElementById(id);
+
+function b64url(bytes){return btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+async function pkce(){
+  const v=new Uint8Array(64); crypto.getRandomValues(v);
+  const verifier=b64url(v);
+  const dig=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(verifier));
+  return {verifier, challenge:b64url(new Uint8Array(dig))};
+}
+async function signIn(){
+  const {verifier,challenge}=await pkce();
+  sessionStorage.setItem('pkce_v',verifier);
+  const p=new URLSearchParams({response_type:'code',client_id:CONFIG.clientId,redirect_uri:REDIRECT_URI,
+    scope:'api openid',code_challenge:challenge,code_challenge_method:'S256'});
+  location.href=`${CONFIG.loginUrl}/services/oauth2/authorize?${p}`;
+}
+async function exchangeCode(code){
+  const verifier=sessionStorage.getItem('pkce_v')||'';
+  const body=new URLSearchParams({grant_type:'authorization_code',code,client_id:CONFIG.clientId,
+    redirect_uri:REDIRECT_URI,code_verifier:verifier});
+  const r=await fetch(`${CONFIG.loginUrl}/services/oauth2/token`,{method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},body});
+  if(!r.ok) throw new Error('Token exchange failed ('+r.status+'). Check the Connected App + CORS allowlist.');
+  const d=await r.json();
+  session={token:d.access_token, instance:d.instance_url, userId:null, name:'', store:''};
+  history.replaceState({},'',REDIRECT_URI);
+  await loadUser();
+}
+async function loadUser(){
+  const r=await fetch(`${session.instance}/services/oauth2/userinfo`,{headers:{Authorization:`Bearer ${session.token}`}});
+  const u=await r.json();
+  session.userId=u.user_id; session.name=u.name||u.preferred_username||'';
+  if(CONFIG.userStoreField){
+    try{
+      const q=encodeURIComponent(`SELECT ${CONFIG.userStoreField} FROM User WHERE Id='${session.userId}'`);
+      const qr=await fetch(`${session.instance}/services/data/${CONFIG.apiVersion}/query?q=${q}`,{headers:{Authorization:`Bearer ${session.token}`}});
+      const qd=await qr.json();
+      session.store=(qd.records&&qd.records[0]&&qd.records[0][CONFIG.userStoreField])||'';
+    }catch(e){ session.store=''; }
+  }
+}
+
+/* ============================================================
+   PHOTO UPLOAD — Cloudinary unsigned
+   ============================================================ */
+let photoUrls=[];
+function renderThumbs(){
+  const t=$("thumbs"); t.innerHTML="";
+  photoUrls.forEach((url,i)=>{
+    const d=document.createElement("div"); d.className="thumb";
+    d.innerHTML=`<img src="${url}" alt=""/><button type="button" class="x" data-i="${i}">✕</button>`;
+    t.appendChild(d);
   });
+  $("photoField").value=photoUrls.join(" , ");
 }
-document.querySelectorAll("select[data-sf]").forEach(sel=>{
-  const f=sel.getAttribute("data-sf");
-  if(OPTIONS[f] && sel.options.length<=1) fillSelect(sel, OPTIONS[f]);
+$("thumbs").addEventListener("click",e=>{
+  const b=e.target.closest(".x"); if(!b) return;
+  photoUrls.splice(+b.dataset.i,1); renderThumbs();
 });
-fillSelect(document.querySelector('select[name="lead_source"]'), OPTIONS["lead_source"]);
-
-/* ---- wire CONFIG: oid, retURL, and field IDs onto inputs ---- */
-document.getElementById("oid").value = CONFIG.oid;
-document.getElementById("retURL").value = CONFIG.retURL;
-const missing=[];
-document.querySelectorAll("[data-sf]").forEach(el=>{
-  const f=el.getAttribute("data-sf");
-  const id=(CONFIG.fieldIds[f]||"").trim();
-  if(id) el.setAttribute("name", id);
-  else missing.push(f);
-});
-/* config warning (visible to admin until IDs are pasted) */
-if(missing.length){
-  const uniq=[...new Set(missing)];
-  const w=document.getElementById("cfgwarn");
-  w.classList.remove("hidden");
-  w.innerHTML="⚙️ <b>Setup needed:</b> "+uniq.length+" custom field ID(s) not yet set in <code>CONFIG.fieldIds</code>. "+
-    "Those fields won't save to Salesforce until their <code>00N…</code> IDs are added. Standard fields (name, email, phone, source) work already.";
+async function uploadFiles(files){
+  if(PREVIEW || !CONFIG.cloudinary.cloudName || !CONFIG.cloudinary.uploadPreset){
+    $("dropSub").textContent = PREVIEW ? "Upload disabled in preview mode" : "Cloudinary not configured yet";
+    return;
+  }
+  for(const file of files){
+    const ph=document.createElement("div"); ph.className="thumb up"; ph.textContent="…"; $("thumbs").appendChild(ph);
+    try{
+      const fd=new FormData(); fd.append("file",file); fd.append("upload_preset",CONFIG.cloudinary.uploadPreset);
+      const r=await fetch(`https://api.cloudinary.com/v1_1/${CONFIG.cloudinary.cloudName}/auto/upload`,{method:"POST",body:fd});
+      const d=await r.json();
+      if(d.secure_url) photoUrls.push(d.secure_url);
+    }catch(e){/* ignore single-file failure */}
+    ph.remove();
+  }
+  renderThumbs();
 }
+(function wireDrop(){
+  const drop=$("drop"), inp=$("fileInput");
+  drop.addEventListener("click",()=>inp.click());
+  inp.addEventListener("change",()=>{ uploadFiles([...inp.files]); inp.value=""; });
+  ["dragenter","dragover"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.add("over");}));
+  ["dragleave","drop"].forEach(ev=>drop.addEventListener(ev,e=>{e.preventDefault();drop.classList.remove("over");}));
+  drop.addEventListener("drop",e=>{ if(e.dataTransfer.files.length) uploadFiles([...e.dataTransfer.files]); });
+})();
 
-/* ============ wizard ============ */
+/* ============================================================
+   WIZARD
+   ============================================================ */
 const steps=[...document.querySelectorAll(".step")];
-const names=["Item","Item Details","Client & Store"];
-let cur=0;
 const stepitems=[...document.querySelectorAll("#stepper .stepitem")];
 const bars=[...document.querySelectorAll("#stepper .bar")];
-const backBtn=document.getElementById("backBtn"),
-      nextBtn=document.getElementById("nextBtn"),
-      submitBtn=document.getElementById("submitBtn");
+const backBtn=$("backBtn"), nextBtn=$("nextBtn"), submitBtn=$("submitBtn");
+let cur=0;
 
 function render(){
   steps.forEach((s,i)=>s.classList.toggle("hidden",i!==cur));
   stepitems.forEach((el,i)=>{el.classList.toggle("done",i<cur);el.classList.toggle("active",i===cur);});
   bars.forEach((b,i)=>b.classList.toggle("fill",i<cur));
-  backBtn.style.visibility = cur===0 ? "hidden":"visible";
-  const last = cur===steps.length-1;
+  backBtn.style.visibility=cur===0?"hidden":"visible";
+  const last=cur===steps.length-1;
   nextBtn.classList.toggle("hidden",last);
   submitBtn.classList.toggle("hidden",!last);
   if(last) buildReview();
-  window.scrollTo({top:0,behavior:"smooth"});
 }
-
 function validateStep(){
-  let ok=true;
-  const active=steps[cur];
-  active.querySelectorAll("[data-req],[data-email]").forEach(el=>{
-    const wrap=el.closest(".fld"); if(!wrap) return;
-    if(el.closest(".cond") && !el.closest(".cond").classList.contains("show")) return;
+  let ok=true; const active=steps[cur];
+  active.querySelectorAll("[data-req],[data-email],[data-req-manual]").forEach(el=>{
+    const wrap=el.closest(".fld"); if(!wrap||wrap.classList.contains("hidden")) return;
+    if(el.closest(".cond")&&!el.closest(".cond").classList.contains("show")) return;
     let bad=false;
-    if(el.hasAttribute("data-req") && !el.value.trim()) bad=true;
-    if(el.hasAttribute("data-email") && el.value.trim() && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim())) bad=true;
-    wrap.classList.toggle("invalid",bad);
-    if(bad) ok=false;
+    if((el.hasAttribute("data-req")||el.hasAttribute("data-req-manual"))&&!el.value.trim()) bad=true;
+    if(el.hasAttribute("data-email")&&el.value.trim()&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(el.value.trim())) bad=true;
+    wrap.classList.toggle("invalid",bad); if(bad) ok=false;
   });
-  // transaction radio group (required on step 1)
   const txnWrap=active.querySelector('#txnSeg');
-  if(txnWrap){
-    const chosen=active.querySelector('input[name="txn"]:checked');
-    const w=txnWrap.closest(".fld");
-    w.classList.toggle("invalid",!chosen);
-    if(!chosen) ok=false;
-  }
+  if(txnWrap){const chosen=active.querySelector('input[name="txn"]:checked');const w=txnWrap.closest(".fld");
+    w.classList.toggle("invalid",!chosen); if(!chosen) ok=false;}
   return ok;
 }
-
-nextBtn.addEventListener("click",()=>{ if(validateStep()){ cur++; render(); }});
+nextBtn.addEventListener("click",()=>{ if(validateStep()){cur++;render();} });
 backBtn.addEventListener("click",()=>{ cur--; render(); });
+$("leadForm").addEventListener("input",e=>{const w=e.target.closest(".fld.invalid");if(w)w.classList.remove("invalid");});
 
-/* clear error state as user fixes a field */
-document.getElementById("leadForm").addEventListener("input",e=>{
-  const w=e.target.closest(".fld.invalid"); if(w) w.classList.remove("invalid");
-});
+/* transaction radio -> hidden field */
+document.querySelectorAll('input[name="txn"]').forEach(r=>r.addEventListener("change",()=>{$("txnType").value=r.value;}));
 
-/* ============ transaction type (segmented -> hidden SF field) ============ */
-const txnType=document.getElementById("txnType");
-document.querySelectorAll('input[name="txn"]').forEach(r=>{
-  r.addEventListener("change",()=>{ txnType.value=r.value; updateConds(); });
-});
-
-/* ============ conditional item sections ============ */
-const itemType=document.getElementById("itemType");
-const hasDiamond=document.getElementById("hasDiamond");
-function showCond(name,on){const el=document.querySelector(`[data-cond="${name}"]`); if(el) el.classList.toggle("show",on);}
+/* conditional item sections */
+const itemType=$("itemType"), hasDiamond=$("hasDiamond");
+function showCond(n,on){const el=document.querySelector(`[data-cond="${n}"]`);if(el)el.classList.toggle("show",on);}
 function updateConds(){
   const t=itemType.value;
-  showCond("watch", t==="ROLEX WATCH"||t==="OTHER WATCH");
-  showCond("jewelry", t==="FINISHED JEWELRY");
-  showCond("bag", t==="HANDBAG");
-  showCond("metals", t==="PRECIOUS METALS");
-  const diamond = t==="LOOSE DIAMONDS" || (t==="FINISHED JEWELRY" && hasDiamond.value==="yes");
-  showCond("diamond", diamond);
-  showCond("loan", txnType.value==="loan");
-  // toggle the "pick a type" placeholder
-  document.getElementById("noType").style.display = t ? "none":"block";
-  // default Rolex brand for Rolex item type
-  if(t==="ROLEX WATCH"){const wb=document.querySelector('[data-sf="watch_brand__c"]'); if(!wb.value) wb.value="Rolex";}
+  showCond("watch",t==="ROLEX WATCH"||t==="OTHER WATCH");
+  showCond("jewelry",t==="FINISHED JEWELRY");
+  showCond("bag",t==="HANDBAG");
+  showCond("metals",t==="PRECIOUS METALS");
+  showCond("diamond", t==="LOOSE DIAMONDS"||(t==="FINISHED JEWELRY"&&hasDiamond.value==="yes"));
+  if(t==="ROLEX WATCH"){const wb=document.querySelector('[data-sf="watch_brand__c"]');if(!wb.value)wb.value="Rolex";}
 }
 itemType.addEventListener("change",updateConds);
 hasDiamond.addEventListener("change",updateConds);
 
-/* ============ review ============ */
+/* review */
+function v(sel){const e=document.querySelector(sel);return e?titleize(e.value):"";}
 function buildReview(){
-  const r=document.getElementById("review"); r.innerHTML="";
+  const r=$("review"); r.innerHTML="";
   const rows=[
-    ["Item", val('[data-sf="Item_Type2__c"]')],
-    ["Transaction", val('#txnType')],
-    ["Requested $", money('[data-sf="request_amount__c"]')],
-    ["Name", `${val('[name="first_name"]')} ${val('[name="last_name"]')}`.trim()],
-    ["Mobile", val('[name="mobile"]')],
-    ["Email", val('[name="email"]')],
-    ["Store", val('[data-sf="Store_Location__c"]')],
-    ["Source", val('[name="lead_source"]')]
+    ["Item",v('[data-sf="Item_Type2__c"]')],
+    ["Transaction",v('#txnType')],
+    ["Requested $",(function(){const x=document.querySelector('[data-sf="request_amount__c"]').value;return x?"$"+Number(x).toLocaleString():"";})()],
+    ["Photos",photoUrls.length?photoUrls.length+" attached":""],
+    ["Name",`${v('[data-sf="FirstName"]')} ${v('[data-sf="LastName"]')}`.trim()],
+    ["Mobile",v('[data-sf="MobilePhone"]')],
+    ["Email",v('[data-sf="Email"]')],
+    ["Store",session&&session.store?session.store:v('[data-sf="Store_Location__c"]')]
   ].filter(x=>x[1]&&x[1]!=="");
-  rows.forEach(([k,v])=>{
-    const d=document.createElement("div"); d.className="row";
-    d.innerHTML=`<span class="k">${k}</span><span class="v">${escapeHtml(v)}</span>`;
-    r.appendChild(d);
-  });
+  rows.forEach(([k,val])=>{const d=document.createElement("div");d.className="row";
+    d.innerHTML=`<span class="k">${k}</span><span class="v">${esc(val)}</span>`;r.appendChild(d);});
 }
-function val(sel){const e=document.querySelector(sel);return e?(e.tagName==="SELECT"?titleize(e.value):titleize(e.value)):"";}
-function money(sel){const e=document.querySelector(sel);const v=e?e.value:"";return v?"$"+Number(v).toLocaleString():"";}
-function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 
-/* ============ submit ============ */
-const form=document.getElementById("leadForm");
-form.addEventListener("submit",e=>{
-  if(!validateStep()){ e.preventDefault(); return; }
-  // don't post fields from hidden conditional sections (avoids blank duplicates overwriting)
-  document.querySelectorAll('.cond:not(.show)').forEach(c=>{
-    c.querySelectorAll('input,select,textarea').forEach(el=>el.disabled=true);
+/* ============================================================
+   SUBMIT — create Lead via REST API as the signed-in user
+   ============================================================ */
+function collectPayload(){
+  const p={};
+  document.querySelectorAll("[data-sf]").forEach(el=>{
+    if(el.disabled) return;
+    if(el.closest(".cond")&&!el.closest(".cond").classList.contains("show")) return;
+    const f=el.getAttribute("data-sf");
+    if(el.type==="checkbox"){ p[f]=el.checked; return; }
+    const val=(el.value||"").trim();
+    if(val!=="") p[f]=val;
   });
-  // success shown when the hidden iframe finishes loading the SF response
-  setTimeout(showSuccess, 400);
+  // store: prefer auto-detected store from the user
+  if(session && session.store) p["Store_Location__c"]=session.store;
+  // Salesforce requires Company on Lead — auto-fill from the client's name
+  if(!p["Company"]) p["Company"]=`${p["FirstName"]||""} ${p["LastName"]||""}`.trim()||"Individual";
+  // flags
+  p["Lead_via_Intake_Form__c"]=true;
+  p["Lead_Attribution__c"]="Market Director Intake";
+  return p;
+}
+async function createLead(payload){
+  const r=await fetch(`${session.instance}/services/data/${CONFIG.apiVersion}/sobjects/Lead`,{
+    method:"POST",
+    headers:{Authorization:`Bearer ${session.token}`,"Content-Type":"application/json","Sforce-Auto-Assign":"FALSE"},
+    body:JSON.stringify(payload)
+  });
+  if(!r.ok){ const e=await r.json().catch(()=>[{message:"HTTP "+r.status}]);
+    throw new Error(Array.isArray(e)?e.map(x=>x.message).join("; "):(e.message||"Insert failed")); }
+  return r.json();
+}
+$("leadForm").addEventListener("submit",async e=>{
+  e.preventDefault();
+  if(!validateStep()) return;
+  $("submitErr").style.display="none";
+  if(PREVIEW){ showSuccess(true); return; }
+  submitBtn.disabled=true; submitBtn.textContent="Submitting…";
+  try{
+    await createLead(collectPayload());
+    showSuccess(false);
+  }catch(err){
+    $("submitErr").textContent="Couldn't create the lead: "+err.message;
+    $("submitErr").style.display="block";
+    submitBtn.disabled=false; submitBtn.textContent="Submit Lead";
+  }
 });
-let submitted=false;
-function showSuccess(){
-  if(submitted) return; submitted=true;
-  form.classList.add("hidden");
-  stepitems.forEach(el=>{el.classList.add("done");el.classList.remove("active");});
-  bars.forEach(b=>b.classList.add("fill"));
-  document.getElementById("success").classList.remove("hidden");
+function showSuccess(preview){
+  $("leadForm").classList.add("hidden");
+  $("stepper").classList.add("hidden");
+  if(preview) $("successMsg").textContent="Preview only — connect Salesforce to actually create the lead.";
+  $("success").classList.remove("hidden");
 }
-document.getElementById("anotherBtn").addEventListener("click",()=>location.reload());
+$("anotherBtn").addEventListener("click",()=>location.reload());
 
-updateConds();
-render();
+/* ============================================================
+   BOOT
+   ============================================================ */
+function showApp(){
+  $("gate").classList.add("hidden");
+  $("stepper").classList.remove("hidden");
+  $("bodyWrap").classList.remove("hidden");
+  // user chip + store box
+  if(session){
+    $("userchip").classList.remove("hidden");
+    $("userName").textContent=session.name||"Signed in";
+    $("userStore").textContent=session.store||"";
+    $("userAvatar").textContent=(session.name||"?").trim().charAt(0).toUpperCase();
+  }
+  const store=session&&session.store;
+  if(store){ $("storeName").textContent=store; }
+  else {
+    // no auto store — show manual picker, hide the "owned by you at" box
+    $("storeBox").classList.add("hidden");
+    $("storeManual").classList.remove("hidden");
+  }
+  updateConds(); render();
+}
+function showGateError(msg){ $("gateErr").textContent=msg; $("gateErr").style.display="block"; }
+function showSetupCard(){
+  $("signinBtn").classList.add("hidden");
+  const c=$("setupCard"); c.classList.remove("hidden");
+  c.innerHTML="<b>⚙️ Setup needed before sign-in works.</b><br>Add your Connected App <code>Consumer Key</code> to "+
+    "<code>CONFIG.clientId</code> in this file, set the OAuth callback to <code>"+esc(REDIRECT_URI)+"</code>, "+
+    "and add this origin to the Salesforce CORS allowlist. Until then you can preview the form below.";
+}
+$("signinBtn").addEventListener("click",signIn);
+
+(async function boot(){
+  $("previewBanner").classList.toggle("hidden",!PREVIEW);
+  const params=new URLSearchParams(location.search);
+  if(params.get("error")){ showGateError(params.get("error_description")||params.get("error")); return; }
+  if(PREVIEW){
+    if(!CONFIG.clientId && location.protocol!=="file:") showSetupCard();
+    // let them preview the form without auth
+    showApp();
+    return;
+  }
+  if(params.get("code")){
+    try{ await exchangeCode(params.get("code")); showApp(); }
+    catch(err){ showGateError(err.message); }
+  }
+  // else: stay on the sign-in gate
+})();
 </script>
 </body>
 </html>
