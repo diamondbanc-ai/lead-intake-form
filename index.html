@@ -9,12 +9,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#eef0f3; --card:#ffffff; --border:#e6e7eb; --border-strong:#d6d8dd;
-    --ink:#0f1729; --text:#3f4654; --muted:#8a909c;
-    --teal:#0e7d86; --teal-press:#0b6770; --teal-light:#6ac5cc;
-    --field-bg:#fbfbfc;
+    --bg:#f4f6f8; --card:#ffffff; --border:#e7e9ee; --border-strong:#d7dae1;
+    --ink:#101728; --text:#444b5a; --muted:#8990a0;
+    --teal:#0e7d86; --teal-press:#0b676f; --teal-light:#6ac5cc;
+    --field-bg:#fbfcfd;
     --ok:#15803d; --err:#dc2626;
-    --r:14px;
     --sans:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
   }
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -22,93 +21,79 @@
   body{
     font-family:var(--sans); background:var(--bg); color:var(--text);
     min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center;
-    padding:32px 20px; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    padding:34px 20px; -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
   }
-  .shell{width:100%; max-width:1040px}
+  .shell{width:100%; max-width:720px}
 
   .card{
-    display:flex; background:var(--card); border:1px solid var(--border);
-    border-radius:20px; overflow:hidden; min-height:640px;
-    box-shadow:0 1px 2px rgba(15,23,41,.04), 0 12px 28px rgba(15,23,41,.07), 0 40px 80px rgba(15,23,41,.06);
+    background:var(--card); border:1px solid var(--border); border-radius:18px; overflow:hidden;
+    box-shadow:0 1px 2px rgba(16,23,40,.04), 0 14px 40px rgba(16,23,40,.08);
   }
+  .accent{height:4px;background:linear-gradient(90deg,var(--teal-light),var(--teal))}
 
-  /* ============ LEFT — gradient panel ============ */
-  .aside{
-    position:relative; width:38%; flex:none; padding:36px 34px 30px;
-    color:#fff; overflow:hidden; display:flex; flex-direction:column;
-    background:linear-gradient(158deg,#0d5a60 0%,#0a3a3f 55%,#082b2e 100%);
-  }
-  .aside::before{
-    content:""; position:absolute; inset:0; pointer-events:none;
-    background:radial-gradient(540px 300px at 90% -12%,rgba(106,197,204,.30),transparent 62%);
-  }
-  /* faint oversized diamond watermark */
-  .aside::after{
-    content:""; position:absolute; right:-70px; bottom:-60px; width:280px; height:280px;
-    border:1px solid rgba(255,255,255,.08); transform:rotate(45deg); border-radius:18px; pointer-events:none;
-  }
+  /* header */
+  .head{display:flex;align-items:center;justify-content:space-between;padding:22px 30px;border-bottom:1px solid var(--border)}
+  .head img{height:30px;width:auto;display:block}
+  .head .wordmark{display:none;font-weight:700;font-size:1.05rem;letter-spacing:.12em;color:var(--ink)}
+  .head .tag{font-size:.72rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
 
-  .brand{position:relative;z-index:1;display:flex;align-items:center;height:34px}
-  .brand img{height:30px;width:auto;display:block;filter:brightness(0) invert(1)}
-  .brand .wordmark{display:none;font-weight:700;font-size:1.05rem;letter-spacing:.14em;color:#fff}
-
-  .aside-head{position:relative;z-index:1;margin-top:40px}
-  .aside-head .eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--teal-light)}
-  .aside-head h1{font-size:1.7rem;font-weight:600;line-height:1.2;color:#fff;margin-top:12px;letter-spacing:-.01em}
-  .aside-head p{font-size:.9rem;line-height:1.55;color:rgba(255,255,255,.72);margin-top:12px;max-width:30ch}
-
-  .stepper{position:relative;z-index:1;margin-top:auto;padding-top:36px}
-  .stepper .line{position:absolute;left:14px;top:50px;bottom:18px;width:2px;background:rgba(255,255,255,.14)}
-  .stepitem{position:relative;display:flex;gap:15px;align-items:center;padding:9px 0}
-  .stepitem .num{position:relative;z-index:1;flex:none;width:29px;height:29px;border-radius:50%;
-    border:1.5px solid rgba(255,255,255,.32);background:#0a3a3f;
-    display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.82rem;
-    color:rgba(255,255,255,.65);transition:.2s}
-  .stepitem .txt .t{font-weight:500;font-size:.92rem;color:rgba(255,255,255,.7);transition:.2s}
-  .stepitem .txt .d{font-size:.76rem;color:rgba(255,255,255,.5);margin-top:1px}
-  .stepitem.active .num{background:#fff;color:var(--teal);border-color:#fff;box-shadow:0 4px 14px rgba(0,0,0,.25)}
-  .stepitem.active .txt .t{color:#fff;font-weight:600}
+  /* stepper */
+  .steps{display:flex;align-items:center;padding:22px 30px 4px}
+  .stepitem{display:flex;align-items:center;gap:9px}
+  .stepitem .num{flex:none;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--border-strong);
+    background:#fff;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:.78rem;
+    color:var(--muted);transition:.2s}
+  .stepitem .t{font-size:.82rem;font-weight:500;color:var(--muted);transition:.2s;white-space:nowrap}
+  .stepitem.active .num{background:var(--teal);border-color:var(--teal);color:#fff}
+  .stepitem.active .t{color:var(--ink);font-weight:600}
   .stepitem.done .num{background:var(--teal-light);border-color:var(--teal-light);color:#063b3f;font-size:0}
-  .stepitem.done .num::after{content:"✓";font-size:.82rem;font-weight:700}
-  .stepitem.done .txt .t{color:rgba(255,255,255,.82)}
+  .stepitem.done .num::after{content:"✓";font-size:.78rem;font-weight:700}
+  .stepitem.done .t{color:var(--text)}
+  .bar{flex:1;height:2px;background:var(--border);margin:0 12px;border-radius:2px;transition:.2s}
+  .bar.fill{background:var(--teal-light)}
 
-  .aside-foot{position:relative;z-index:1;margin-top:28px;font-size:.72rem;color:rgba(255,255,255,.45);font-weight:500}
-
-  /* ============ RIGHT — form panel ============ */
-  .panel{flex:1;min-width:0;padding:42px 46px 32px;display:flex;flex-direction:column}
-  .panel-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:26px}
-  .panel-head .secname{font-weight:600;font-size:.95rem;color:var(--ink)}
-  .panel-head .count{font-weight:500;font-size:.78rem;color:var(--muted);background:#f1f2f4;padding:5px 11px;border-radius:99px}
-
+  /* body */
+  .body{padding:26px 30px 30px}
   .cfgwarn{background:#fef2f2;border:1px solid #fecaca;color:#b42318;
     border-radius:10px;padding:12px 14px;font-size:.8rem;margin-bottom:20px;line-height:1.5}
   .cfgwarn code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;background:rgba(180,35,24,.08);padding:1px 5px;border-radius:4px;font-size:.92em}
 
   fieldset{border:none}
-  legend{font-size:1.4rem;font-weight:600;color:var(--ink);padding:0;letter-spacing:-.01em}
-  .legend-sub{color:var(--muted);font-size:.9rem;margin:7px 0 24px;line-height:1.5}
+  legend{font-size:1.32rem;font-weight:600;color:var(--ink);padding:0;letter-spacing:-.01em}
+  .legend-sub{color:var(--muted);font-size:.88rem;margin:6px 0 22px;line-height:1.5}
 
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 18px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:17px 18px}
   .full{grid-column:1/-1}
-  @media(max-width:560px){.grid{grid-template-columns:1fr}}
+  @media(max-width:540px){.grid{grid-template-columns:1fr}}
 
   label.fld{display:block}
   label.fld .lab{display:block;color:var(--ink);font-weight:500;font-size:.84rem;margin-bottom:7px}
   label.fld .req{color:var(--teal);font-weight:600}
+  label.fld .hint{color:var(--muted);font-weight:400}
   input,select,textarea{
     width:100%;background:var(--field-bg);border:1px solid var(--border-strong);color:var(--ink);
     border-radius:10px;padding:11px 13px;font-size:.92rem;font-family:inherit;outline:none;
     transition:border-color .15s,box-shadow .15s,background .15s}
-  input::placeholder,textarea::placeholder{color:#aab0bb}
-  input:hover,select:hover,textarea:hover{border-color:#c2c5cc}
+  input::placeholder,textarea::placeholder{color:#abb1bd}
+  input:hover,select:hover,textarea:hover{border-color:#c4c8d1}
   input:focus,select:focus,textarea:focus{background:#fff;border-color:var(--teal);box-shadow:0 0 0 3.5px rgba(14,125,134,.13)}
   textarea{resize:vertical;min-height:92px}
-  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5l4 4 4-4' stroke='%238a909c' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5l4 4 4-4' stroke='%238990a0' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat:no-repeat;background-position:right 13px center;padding-right:36px;cursor:pointer}
   .err-msg{color:var(--err);font-size:.76rem;margin-top:6px;display:none;font-weight:500}
   .invalid input,.invalid select,.invalid textarea{border-color:var(--err);background:#fff}
   .invalid input:focus,.invalid select:focus,.invalid textarea:focus{box-shadow:0 0 0 3.5px rgba(220,38,38,.12)}
   .invalid .err-msg{display:block}
+
+  /* segmented control (transaction type) */
+  .seg{display:flex;gap:10px}
+  .seg label{flex:1;position:relative;cursor:pointer}
+  .seg input{position:absolute;opacity:0;inset:0;cursor:pointer}
+  .seg .opt{display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;border-radius:10px;
+    border:1.5px solid var(--border-strong);background:var(--field-bg);font-weight:600;font-size:.9rem;color:var(--text);
+    transition:.15s}
+  .seg input:hover + .opt{border-color:#c4c8d1}
+  .seg input:checked + .opt{border-color:var(--teal);background:rgba(14,125,134,.06);color:var(--teal);box-shadow:0 0 0 3px rgba(14,125,134,.1)}
 
   .check{display:flex;gap:12px;align-items:flex-start;background:var(--field-bg);border:1px solid var(--border);
     border-radius:10px;padding:14px 15px;margin-top:18px}
@@ -118,9 +103,12 @@
 
   .cond{display:none}
   .cond.show{display:block}
-  .step{flex:1}
+  .subhead{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+    margin:4px 0 14px;padding-bottom:9px;border-bottom:1px solid var(--border)}
+  .empty-note{color:var(--muted);font-size:.88rem;background:var(--field-bg);border:1px dashed var(--border-strong);
+    border-radius:10px;padding:16px;text-align:center}
 
-  .nav{display:flex;justify-content:space-between;gap:12px;margin-top:auto;padding-top:30px}
+  .nav{display:flex;justify-content:space-between;gap:12px;margin-top:30px}
   button{font-family:inherit;font-size:.9rem;font-weight:600;border-radius:10px;padding:11px 22px;cursor:pointer;
     border:1px solid transparent;transition:background .15s,box-shadow .15s,border-color .15s,color .15s,transform .04s}
   button:active{transform:translateY(1px)}
@@ -136,83 +124,46 @@
   .review .k{color:var(--muted);font-weight:500;font-size:.84rem}
   .review .v{text-align:right;font-weight:600;color:var(--ink)}
 
-  .success{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px}
+  .success{display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
   .success .mark{width:72px;height:72px;border-radius:50%;background:rgba(21,128,61,.09);
     display:flex;align-items:center;justify-content:center;margin-bottom:20px;border:1px solid rgba(21,128,61,.25)}
-  .success h2{font-size:1.45rem;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+  .success h2{font-size:1.4rem;font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
   .success p{color:var(--muted);max-width:34ch;font-size:.92rem;line-height:1.5}
   .success .again{margin-top:26px}
 
-  footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:22px;font-weight:500}
+  footer{text-align:center;color:var(--muted);font-size:.76rem;margin-top:20px;font-weight:500}
 
-  /* ============ responsive ============ */
-  @media(max-width:820px){
-    .card{flex-direction:column;min-height:0}
-    .aside{width:100%;padding:28px 28px 24px}
-    .aside-head{margin-top:24px}
-    .aside-head h1{font-size:1.45rem}
-    .aside::after{display:none}
-    .stepper{margin-top:26px;padding-top:0}
-    .stepper .line{display:none}
-    .stepper-list{display:flex;flex-wrap:wrap;gap:8px 20px}
-    .stepitem{padding:5px 0}
-    .stepitem .txt .d{display:none}
-    .aside-foot{display:none}
-    .panel{padding:30px 26px 26px}
+  @media(max-width:540px){
+    .head,.steps,.body{padding-left:20px;padding-right:20px}
+    .stepitem .t{display:none}
+    .bar{margin:0 8px}
   }
 </style>
 </head>
 <body>
 <div class="shell">
   <div class="card">
+    <div class="accent"></div>
 
-    <!-- ============ LEFT: gradient panel ============ -->
-    <aside class="aside">
-      <div class="brand">
-        <img src="https://www.diamondbanc.com/wp-content/themes/diamondbanc/img/diamond-banc-logo.svg"
-             alt="Diamond Banc"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
-        <span class="wordmark">DIAMOND BANC</span>
-      </div>
+    <!-- header -->
+    <div class="head">
+      <img src="https://www.diamondbanc.com/wp-content/themes/diamondbanc/img/diamond-banc-logo.svg"
+           alt="Diamond Banc"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+      <span class="wordmark">DIAMOND BANC</span>
+      <span class="tag">Lead Intake</span>
+    </div>
 
-      <div class="aside-head">
-        <div class="eyebrow">Lead Intake</div>
-        <h1>Let&rsquo;s get this lead in.</h1>
-        <p>Four quick steps and it lands directly in Salesforce. Takes about a minute.</p>
-      </div>
+    <!-- stepper -->
+    <div class="steps" id="stepper">
+      <div class="stepitem" data-i="0"><span class="num">1</span><span class="t">Item</span></div>
+      <div class="bar"></div>
+      <div class="stepitem" data-i="1"><span class="num">2</span><span class="t">Details</span></div>
+      <div class="bar"></div>
+      <div class="stepitem" data-i="2"><span class="num">3</span><span class="t">Client</span></div>
+    </div>
 
-      <div class="stepper" id="stepper">
-        <div class="line"></div>
-        <div class="stepper-list">
-          <div class="stepitem" data-i="0">
-            <div class="num">1</div>
-            <div class="txt"><div class="t">Store &amp; Source</div><div class="d">Where &amp; how it came in</div></div>
-          </div>
-          <div class="stepitem" data-i="1">
-            <div class="num">2</div>
-            <div class="txt"><div class="t">Customer</div><div class="d">Who we&rsquo;re working with</div></div>
-          </div>
-          <div class="stepitem" data-i="2">
-            <div class="num">3</div>
-            <div class="txt"><div class="t">Item Details</div><div class="d">What they&rsquo;re bringing in</div></div>
-          </div>
-          <div class="stepitem" data-i="3">
-            <div class="num">4</div>
-            <div class="txt"><div class="t">Valuation</div><div class="d">Figures &amp; review</div></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="aside-foot">Internal use · Diamond Banc</div>
-    </aside>
-
-    <!-- ============ RIGHT: form panel ============ -->
-    <div class="panel">
-      <div class="panel-head">
-        <span class="secname" id="stepName">Store &amp; Source</span>
-        <span class="count" id="stepCount">Step 1 of 4</span>
-      </div>
-
+    <div class="body">
       <div id="cfgwarn" class="cfgwarn hidden"></div>
 
       <!-- Native Web-to-Lead form; posts to hidden iframe so user stays in-app -->
@@ -225,93 +176,11 @@
         <input type="hidden" data-sf="Lead_via_Intake_Form__c" value="1" />
         <input type="hidden" data-sf="Lead_Attribution__c" value="Market Director Intake" />
 
-        <!-- ============ STEP 1: STORE & SOURCE ============ -->
+        <!-- ============ STEP 1: ITEM ============ -->
         <section class="step" data-step="0">
           <fieldset>
-            <legend>Store &amp; Source</legend>
-            <p class="legend-sub">Where is this lead being entered and how did they come in?</p>
-            <div class="grid">
-              <label class="fld">
-                <span class="lab">Store Location <span class="req">*</span></span>
-                <select data-sf="Store_Location__c" data-req>
-                  <option value="">Select location…</option>
-                </select>
-                <span class="err-msg">Please select a store location.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Lead Source <span class="req">*</span></span>
-                <select name="lead_source" data-req>
-                  <option value="">Select source…</option>
-                </select>
-                <span class="err-msg">Please select a lead source.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Why did they come in?</span>
-                <select data-sf="Why_In__c">
-                  <option value="">Select…</option>
-                </select>
-              </label>
-              <label class="fld">
-                <span class="lab">Transaction Type <span class="req">*</span></span>
-                <select data-sf="transaction_type__c" data-req>
-                  <option value="">Select…</option>
-                  <option value="loan">Loan</option>
-                  <option value="sell">Sell</option>
-                  <option value="Appraisal">Appraisal</option>
-                  <option value="Estate Appraisal">Estate Appraisal</option>
-                  <option value="unsure">Unsure / Exploring</option>
-                </select>
-                <span class="err-msg">Please select a transaction type.</span>
-              </label>
-            </div>
-          </fieldset>
-        </section>
-
-        <!-- ============ STEP 2: CUSTOMER ============ -->
-        <section class="step hidden" data-step="1">
-          <fieldset>
-            <legend>Customer Details</legend>
-            <p class="legend-sub">Who are we working with?</p>
-            <div class="grid">
-              <label class="fld">
-                <span class="lab">First Name <span class="req">*</span></span>
-                <input name="first_name" maxlength="40" data-req autocomplete="given-name"/>
-                <span class="err-msg">First name is required.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Last Name <span class="req">*</span></span>
-                <input name="last_name" maxlength="80" data-req autocomplete="family-name"/>
-                <span class="err-msg">Last name is required.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Mobile Phone <span class="req">*</span></span>
-                <input name="mobile" type="tel" data-req autocomplete="tel"/>
-                <span class="err-msg">A contact phone number is required.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Email</span>
-                <input name="email" type="email" data-email autocomplete="email"/>
-                <span class="err-msg">Please enter a valid email.</span>
-              </label>
-              <label class="fld full">
-                <span class="lab">Company (optional)</span>
-                <input name="company" maxlength="40" placeholder="Leave blank for individuals"/>
-              </label>
-            </div>
-            <div class="check">
-              <input type="checkbox" id="smsConsent" data-sf="text_message_consent__c" value="1"/>
-              <label for="smsConsent" class="ctxt">Customer consents to text messaging
-                <small>Check if the customer agreed to receive SMS updates.</small>
-              </label>
-            </div>
-          </fieldset>
-        </section>
-
-        <!-- ============ STEP 3: ITEM ============ -->
-        <section class="step hidden" data-step="2">
-          <fieldset>
-            <legend>Item Details</legend>
-            <p class="legend-sub">What are they bringing in? Fields adjust to the item type.</p>
+            <legend>What are they bringing in?</legend>
+            <p class="legend-sub">Start with the item. The next step adjusts to the type you pick.</p>
             <div class="grid">
               <label class="fld full">
                 <span class="lab">Item Type <span class="req">*</span></span>
@@ -326,22 +195,57 @@
                 </select>
                 <span class="err-msg">Please select an item type.</span>
               </label>
+
+              <label class="fld full">
+                <span class="lab">Transaction Type <span class="req">*</span></span>
+                <div class="seg" id="txnSeg">
+                  <label>
+                    <input type="radio" name="txn" value="sell" id="txnSell" data-sf-radio="transaction_type__c" data-req-radio/>
+                    <span class="opt">Sell</span>
+                  </label>
+                  <label>
+                    <input type="radio" name="txn" value="loan" id="txnLoan" data-sf-radio="transaction_type__c" data-req-radio/>
+                    <span class="opt">Loan</span>
+                  </label>
+                </div>
+                <input type="hidden" id="txnType" data-sf="transaction_type__c" />
+                <span class="err-msg" id="txnErr">Please choose sell or loan.</span>
+              </label>
+
+              <label class="fld full">
+                <span class="lab">Requested Amount ($) <span class="hint">— what the client wants for their item</span></span>
+                <input data-sf="request_amount__c" type="number" min="0" step="100" inputmode="numeric" placeholder="e.g. 5000"/>
+              </label>
+
+              <label class="fld full">
+                <span class="lab">Item Description / Notes</span>
+                <textarea data-sf="item_description__c" maxlength="32000" placeholder="Condition, paperwork, anything notable about the item…"></textarea>
+              </label>
             </div>
+          </fieldset>
+        </section>
+
+        <!-- ============ STEP 2: DETAILS & PHOTOS ============ -->
+        <section class="step hidden" data-step="1">
+          <fieldset>
+            <legend>Item details</legend>
+            <p class="legend-sub" id="detailsSub">Specifics for this item, plus any photos.</p>
+
+            <!-- placeholder when no item type chosen -->
+            <div class="empty-note" id="noType">Pick an item type on the first step to see its fields.</div>
 
             <!-- WATCH -->
-            <div class="cond" data-cond="watch" style="margin-top:18px">
+            <div class="cond" data-cond="watch">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Watch Brand</span>
-                  <select data-sf="watch_brand__c">
-                    <option value="">Select brand…</option>
-                  </select>
+                  <select data-sf="watch_brand__c"><option value="">Select brand…</option></select>
                 </label>
               </div>
             </div>
 
             <!-- JEWELRY -->
-            <div class="cond" data-cond="jewelry" style="margin-top:18px">
+            <div class="cond" data-cond="jewelry">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Jewelry Type</span>
@@ -368,7 +272,7 @@
 
             <!-- DIAMOND (loose, or jewelry w/ diamond) -->
             <div class="cond" data-cond="diamond" style="margin-top:18px">
-              <p class="legend-sub" style="margin-bottom:14px">Diamond details (the 4 C&rsquo;s)</p>
+              <div class="subhead">Diamond details — the 4 C&rsquo;s</div>
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Carat Weight</span>
@@ -398,7 +302,7 @@
             </div>
 
             <!-- HANDBAG -->
-            <div class="cond" data-cond="bag" style="margin-top:18px">
+            <div class="cond" data-cond="bag">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Handbag Brand</span>
@@ -416,7 +320,7 @@
             </div>
 
             <!-- PRECIOUS METALS -->
-            <div class="cond" data-cond="metals" style="margin-top:18px">
+            <div class="cond" data-cond="metals">
               <div class="grid">
                 <label class="fld">
                   <span class="lab">Metal Item Type</span>
@@ -428,42 +332,91 @@
                 </label>
               </div>
             </div>
-          </fieldset>
-        </section>
 
-        <!-- ============ STEP 4: VALUATION + REVIEW ============ -->
-        <section class="step hidden" data-step="3">
-          <fieldset>
-            <legend>Valuation &amp; Notes</legend>
-            <p class="legend-sub">Ballpark figures and any context.</p>
+            <!-- shared valuation + photos -->
+            <div class="subhead" style="margin-top:24px">Valuation &amp; photos</div>
             <div class="grid">
-              <label class="fld">
-                <span class="lab">Requested Amount ($)</span>
-                <input data-sf="request_amount__c" type="number" min="0" step="100" inputmode="numeric"/>
-              </label>
               <label class="fld">
                 <span class="lab">Original Purchase Price ($)</span>
                 <input data-sf="Original_Purchase_Price__c" type="number" min="0" step="100" inputmode="numeric"/>
               </label>
-              <label class="fld full">
-                <span class="lab">Estimated Loan Duration (if loan)</span>
+              <label class="fld cond" data-cond="loan">
+                <span class="lab">Estimated Loan Duration</span>
                 <input data-sf="est_loan_duration__c" placeholder="e.g. 90 days"/>
               </label>
               <label class="fld full">
-                <span class="lab">Item Description / Notes</span>
-                <textarea data-sf="item_description__c" maxlength="32000" placeholder="Condition, paperwork, anything notable…"></textarea>
+                <span class="lab">Photo Link <span class="hint">— paste a link to the item photo(s)</span></span>
+                <input data-sf="upload_photo__c" type="url" placeholder="Drive, Dropbox, iCloud, etc."/>
               </label>
               <label class="fld full">
-                <span class="lab">Photo Link (optional)</span>
-                <input data-sf="upload_photo__c" type="url" placeholder="Paste a photo URL (Drive, Dropbox, etc.)"/>
-              </label>
-              <label class="fld full">
-                <span class="lab">Appraisal Link (optional)</span>
+                <span class="lab">Appraisal Link <span class="hint">— optional</span></span>
                 <input data-sf="upload_appraisal__c" type="url" placeholder="Paste an appraisal URL"/>
               </label>
             </div>
+          </fieldset>
+        </section>
 
-            <p class="legend-sub" style="margin:26px 0 10px">Review</p>
+        <!-- ============ STEP 3: CLIENT & STORE ============ -->
+        <section class="step hidden" data-step="2">
+          <fieldset>
+            <legend>Client &amp; store</legend>
+            <p class="legend-sub">Who is the client, and where is this lead coming from?</p>
+            <div class="grid">
+              <label class="fld">
+                <span class="lab">First Name <span class="req">*</span></span>
+                <input name="first_name" maxlength="40" data-req autocomplete="given-name"/>
+                <span class="err-msg">First name is required.</span>
+              </label>
+              <label class="fld">
+                <span class="lab">Last Name <span class="req">*</span></span>
+                <input name="last_name" maxlength="80" data-req autocomplete="family-name"/>
+                <span class="err-msg">Last name is required.</span>
+              </label>
+              <label class="fld">
+                <span class="lab">Mobile Phone <span class="req">*</span></span>
+                <input name="mobile" type="tel" data-req autocomplete="tel"/>
+                <span class="err-msg">A contact phone number is required.</span>
+              </label>
+              <label class="fld">
+                <span class="lab">Email</span>
+                <input name="email" type="email" data-email autocomplete="email"/>
+                <span class="err-msg">Please enter a valid email.</span>
+              </label>
+              <label class="fld full">
+                <span class="lab">Company <span class="hint">— optional</span></span>
+                <input name="company" maxlength="40" placeholder="Leave blank for individuals"/>
+              </label>
+
+              <label class="fld">
+                <span class="lab">Store Location <span class="req">*</span></span>
+                <select data-sf="Store_Location__c" data-req>
+                  <option value="">Select location…</option>
+                </select>
+                <span class="err-msg">Please select a store location.</span>
+              </label>
+              <label class="fld">
+                <span class="lab">Lead Source <span class="req">*</span></span>
+                <select name="lead_source" data-req>
+                  <option value="">Select source…</option>
+                </select>
+                <span class="err-msg">Please select a lead source.</span>
+              </label>
+              <label class="fld full">
+                <span class="lab">Why did they come in? <span class="hint">— optional</span></span>
+                <select data-sf="Why_In__c">
+                  <option value="">Select…</option>
+                </select>
+              </label>
+            </div>
+
+            <div class="check">
+              <input type="checkbox" id="smsConsent" data-sf="text_message_consent__c" value="1"/>
+              <label for="smsConsent" class="ctxt">Customer consents to text messaging
+                <small>Check if the customer agreed to receive SMS updates.</small>
+              </label>
+            </div>
+
+            <div class="subhead" style="margin-top:24px">Review</div>
             <div class="review" id="review"></div>
           </fieldset>
         </section>
@@ -486,7 +439,6 @@
         <div class="again"><button type="button" class="btn-primary" id="anotherBtn">Enter another lead</button></div>
       </div>
     </div>
-
   </div>
 
   <footer>Submissions create a Lead in Salesforce · Internal use only</footer>
@@ -587,17 +539,19 @@ document.querySelectorAll("[data-sf]").forEach(el=>{
 });
 /* config warning (visible to admin until IDs are pasted) */
 if(missing.length){
+  const uniq=[...new Set(missing)];
   const w=document.getElementById("cfgwarn");
   w.classList.remove("hidden");
-  w.innerHTML="⚙️ <b>Setup needed:</b> "+missing.length+" custom field ID(s) not yet set in <code>CONFIG.fieldIds</code>. "+
+  w.innerHTML="⚙️ <b>Setup needed:</b> "+uniq.length+" custom field ID(s) not yet set in <code>CONFIG.fieldIds</code>. "+
     "Those fields won't save to Salesforce until their <code>00N…</code> IDs are added. Standard fields (name, email, phone, source) work already.";
 }
 
 /* ============ wizard ============ */
 const steps=[...document.querySelectorAll(".step")];
-const names=["Store & Source","Customer","Item Details","Valuation"];
+const names=["Item","Item Details","Client & Store"];
 let cur=0;
 const stepitems=[...document.querySelectorAll("#stepper .stepitem")];
+const bars=[...document.querySelectorAll("#stepper .bar")];
 const backBtn=document.getElementById("backBtn"),
       nextBtn=document.getElementById("nextBtn"),
       submitBtn=document.getElementById("submitBtn");
@@ -605,8 +559,7 @@ const backBtn=document.getElementById("backBtn"),
 function render(){
   steps.forEach((s,i)=>s.classList.toggle("hidden",i!==cur));
   stepitems.forEach((el,i)=>{el.classList.toggle("done",i<cur);el.classList.toggle("active",i===cur);});
-  document.getElementById("stepName").textContent=names[cur];
-  document.getElementById("stepCount").textContent=`Step ${cur+1} of ${steps.length}`;
+  bars.forEach((b,i)=>b.classList.toggle("fill",i<cur));
   backBtn.style.visibility = cur===0 ? "hidden":"visible";
   const last = cur===steps.length-1;
   nextBtn.classList.toggle("hidden",last);
@@ -620,7 +573,6 @@ function validateStep(){
   const active=steps[cur];
   active.querySelectorAll("[data-req],[data-email]").forEach(el=>{
     const wrap=el.closest(".fld"); if(!wrap) return;
-    // skip controls inside a hidden conditional block
     if(el.closest(".cond") && !el.closest(".cond").classList.contains("show")) return;
     let bad=false;
     if(el.hasAttribute("data-req") && !el.value.trim()) bad=true;
@@ -628,6 +580,14 @@ function validateStep(){
     wrap.classList.toggle("invalid",bad);
     if(bad) ok=false;
   });
+  // transaction radio group (required on step 1)
+  const txnWrap=active.querySelector('#txnSeg');
+  if(txnWrap){
+    const chosen=active.querySelector('input[name="txn"]:checked');
+    const w=txnWrap.closest(".fld");
+    w.classList.toggle("invalid",!chosen);
+    if(!chosen) ok=false;
+  }
   return ok;
 }
 
@@ -639,10 +599,16 @@ document.getElementById("leadForm").addEventListener("input",e=>{
   const w=e.target.closest(".fld.invalid"); if(w) w.classList.remove("invalid");
 });
 
+/* ============ transaction type (segmented -> hidden SF field) ============ */
+const txnType=document.getElementById("txnType");
+document.querySelectorAll('input[name="txn"]').forEach(r=>{
+  r.addEventListener("change",()=>{ txnType.value=r.value; updateConds(); });
+});
+
 /* ============ conditional item sections ============ */
 const itemType=document.getElementById("itemType");
 const hasDiamond=document.getElementById("hasDiamond");
-function showCond(name,on){document.querySelector(`[data-cond="${name}"]`).classList.toggle("show",on);}
+function showCond(name,on){const el=document.querySelector(`[data-cond="${name}"]`); if(el) el.classList.toggle("show",on);}
 function updateConds(){
   const t=itemType.value;
   showCond("watch", t==="ROLEX WATCH"||t==="OTHER WATCH");
@@ -651,6 +617,9 @@ function updateConds(){
   showCond("metals", t==="PRECIOUS METALS");
   const diamond = t==="LOOSE DIAMONDS" || (t==="FINISHED JEWELRY" && hasDiamond.value==="yes");
   showCond("diamond", diamond);
+  showCond("loan", txnType.value==="loan");
+  // toggle the "pick a type" placeholder
+  document.getElementById("noType").style.display = t ? "none":"block";
   // default Rolex brand for Rolex item type
   if(t==="ROLEX WATCH"){const wb=document.querySelector('[data-sf="watch_brand__c"]'); if(!wb.value) wb.value="Rolex";}
 }
@@ -661,14 +630,14 @@ hasDiamond.addEventListener("change",updateConds);
 function buildReview(){
   const r=document.getElementById("review"); r.innerHTML="";
   const rows=[
-    ["Store", val('[data-sf="Store_Location__c"]')],
-    ["Source", val('[name="lead_source"]')],
-    ["Transaction", val('[data-sf="transaction_type__c"]')],
+    ["Item", val('[data-sf="Item_Type2__c"]')],
+    ["Transaction", val('#txnType')],
+    ["Requested $", money('[data-sf="request_amount__c"]')],
     ["Name", `${val('[name="first_name"]')} ${val('[name="last_name"]')}`.trim()],
     ["Mobile", val('[name="mobile"]')],
     ["Email", val('[name="email"]')],
-    ["Item", val('[data-sf="Item_Type2__c"]')],
-    ["Requested $", money('[data-sf="request_amount__c"]')]
+    ["Store", val('[data-sf="Store_Location__c"]')],
+    ["Source", val('[name="lead_source"]')]
   ].filter(x=>x[1]&&x[1]!=="");
   rows.forEach(([k,v])=>{
     const d=document.createElement("div"); d.className="row";
@@ -676,14 +645,18 @@ function buildReview(){
     r.appendChild(d);
   });
 }
-function val(sel){const e=document.querySelector(sel);return e?(e.selectedOptions?titleize(e.value):e.value):"";}
-function money(sel){const v=val(sel);return v?"$"+Number(v).toLocaleString():"";}
+function val(sel){const e=document.querySelector(sel);return e?(e.tagName==="SELECT"?titleize(e.value):titleize(e.value)):"";}
+function money(sel){const e=document.querySelector(sel);const v=e?e.value:"";return v?"$"+Number(v).toLocaleString():"";}
 function escapeHtml(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 
 /* ============ submit ============ */
 const form=document.getElementById("leadForm");
 form.addEventListener("submit",e=>{
   if(!validateStep()){ e.preventDefault(); return; }
+  // don't post fields from hidden conditional sections (avoids blank duplicates overwriting)
+  document.querySelectorAll('.cond:not(.show)').forEach(c=>{
+    c.querySelectorAll('input,select,textarea').forEach(el=>el.disabled=true);
+  });
   // success shown when the hidden iframe finishes loading the SF response
   setTimeout(showSuccess, 400);
 });
@@ -692,10 +665,12 @@ function showSuccess(){
   if(submitted) return; submitted=true;
   form.classList.add("hidden");
   stepitems.forEach(el=>{el.classList.add("done");el.classList.remove("active");});
+  bars.forEach(b=>b.classList.add("fill"));
   document.getElementById("success").classList.remove("hidden");
 }
 document.getElementById("anotherBtn").addEventListener("click",()=>location.reload());
 
+updateConds();
 render();
 </script>
 </body>
