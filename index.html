@@ -105,6 +105,14 @@
   .check .ctxt{font-size:.86rem;color:var(--ink);font-weight:500}
   .check .ctxt small{display:block;color:var(--muted);margin-top:3px;font-size:.78rem;font-weight:400}
 
+  /* star rating */
+  .starrow{display:flex;gap:6px;align-items:center;background:var(--field-bg);border:1px solid var(--border-strong);
+    border-radius:10px;padding:9px 13px}
+  .starbtn{background:none;border:none;padding:2px;font-size:1.4rem;line-height:1;color:var(--border-strong);
+    cursor:pointer;transition:color .1s,transform .1s}
+  .starbtn:hover{transform:scale(1.12)}
+  .starbtn.on{color:#e3a008}
+
   .cond{display:none}
   .cond.show{display:block}
   .subhead{font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
@@ -227,7 +235,7 @@
             <legend>Item information</legend>
             <p class="legend-sub">Start with the item. The fields adjust to the type you pick.</p>
             <div class="grid">
-              <label class="fld">
+              <label class="fld full">
                 <span class="lab">Item Type <span class="req">*</span></span>
                 <select id="itemType" data-sf="Item_Type2__c" data-req>
                   <option value="">Select item type…</option>
@@ -239,17 +247,6 @@
                   <option value="PRECIOUS METALS">Precious Metals</option>
                 </select>
                 <span class="err-msg">Please select an item type.</span>
-              </label>
-              <label class="fld">
-                <span class="lab">Lead Status <span class="hint">— e.g. mark "Working" if intaking in person</span></span>
-                <select data-sf="Status">
-                  <option value="New">New</option>
-                  <option value="Working">Working</option>
-                  <option value="Nurturing">Nurturing</option>
-                  <option value="Qualified">Qualified</option>
-                  <option value="Unresponsive">Unresponsive</option>
-                  <option value="Unqualified">Unqualified</option>
-                </select>
               </label>
             </div>
 
@@ -446,6 +443,32 @@
               <select data-sf="Store_Location__c" data-req-manual><option value="">Select location…</option></select>
               <span class="err-msg">Please select a store location.</span>
             </label>
+
+            <div class="subhead" style="margin-top:24px">Lead status &amp; quality</div>
+            <div class="grid">
+              <label class="fld">
+                <span class="lab">Lead Status <span class="hint">— mark "Working" if intaking in person</span></span>
+                <select data-sf="Status">
+                  <option value="New">New</option>
+                  <option value="Working">Working</option>
+                  <option value="Nurturing">Nurturing</option>
+                  <option value="Qualified">Qualified</option>
+                  <option value="Unresponsive">Unresponsive</option>
+                  <option value="Unqualified">Unqualified</option>
+                </select>
+              </label>
+              <label class="fld">
+                <span class="lab">Lead Quality <span class="hint">— your read on this lead</span></span>
+                <div class="starrow" id="starRow">
+                  <button type="button" class="starbtn" data-n="1" aria-label="1 star">★</button>
+                  <button type="button" class="starbtn" data-n="2" aria-label="2 stars">★</button>
+                  <button type="button" class="starbtn" data-n="3" aria-label="3 stars">★</button>
+                  <button type="button" class="starbtn" data-n="4" aria-label="4 stars">★</button>
+                  <button type="button" class="starbtn" data-n="5" aria-label="5 stars">★</button>
+                </div>
+                <input type="hidden" data-sf="Lead_Quality__c" id="leadQuality"/>
+              </label>
+            </div>
 
             <div class="subhead" style="margin-top:24px">Review</div>
             <div class="review" id="review"></div>
@@ -650,6 +673,21 @@ $("leadForm").addEventListener("input",e=>{const w=e.target.closest(".fld.invali
 /* transaction radio -> hidden field */
 document.querySelectorAll('input[name="txn"]').forEach(r=>r.addEventListener("change",()=>{$("txnType").value=r.value;}));
 
+/* star rating -> hidden field */
+(function wireStars(){
+  const btns=[...document.querySelectorAll(".starbtn")], out=$("leadQuality");
+  let picked=0;
+  function paint(n){ btns.forEach(b=>b.classList.toggle("on",+b.dataset.n<=n)); }
+  btns.forEach(b=>{
+    b.addEventListener("mouseenter",()=>paint(+b.dataset.n));
+    b.addEventListener("mouseleave",()=>paint(picked));
+    b.addEventListener("click",()=>{
+      picked=+b.dataset.n; paint(picked);
+      out.value=picked===1?"1 Star":picked+" Stars";
+    });
+  });
+})();
+
 /* conditional item sections */
 const itemType=$("itemType"), hasDiamond=$("hasDiamond");
 function showCond(n,on){const el=document.querySelector(`[data-cond="${n}"]`);if(el)el.classList.toggle("show",on);}
@@ -671,14 +709,15 @@ function buildReview(){
   const r=$("review"); r.innerHTML="";
   const rows=[
     ["Item",v('[data-sf="Item_Type2__c"]')],
-    ["Lead Status",v('[data-sf="Status"]')],
     ["Transaction",v('#txnType')],
     ["Requested $",(function(){const x=document.querySelector('[data-sf="request_amount__c"]').value;return x?"$"+Number(x).toLocaleString():"";})()],
     ["Photos",photoUrls.length?photoUrls.length+" attached":""],
     ["Name",`${v('[data-sf="FirstName"]')} ${v('[data-sf="LastName"]')}`.trim()],
     ["Mobile",v('[data-sf="MobilePhone"]')],
     ["Email",v('[data-sf="Email"]')],
-    ["Store",session&&session.store?session.store:v('[data-sf="Store_Location__c"]')]
+    ["Store",session&&session.store?session.store:v('[data-sf="Store_Location__c"]')],
+    ["Lead Status",v('[data-sf="Status"]')],
+    ["Lead Quality",v('[data-sf="Lead_Quality__c"]')]
   ].filter(x=>x[1]&&x[1]!=="");
   rows.forEach(([k,val])=>{const d=document.createElement("div");d.className="row";
     d.innerHTML=`<span class="k">${k}</span><span class="v">${esc(val)}</span>`;r.appendChild(d);});
